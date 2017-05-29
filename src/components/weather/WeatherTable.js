@@ -1,10 +1,11 @@
 import React from 'react';
+import GoogleMapReact from 'google-map-react';
 
 class WeatherTable extends React.Component {
     render () {
-        console.log('it is my props');
         console.log(this.props);
         return (
+        <div className="row">
             <table className="table table-striped">
 
                  <thead>
@@ -32,11 +33,17 @@ class WeatherTable extends React.Component {
                         <td className="text-center">{this.props.weatherData.data.main.temp_max}</td>
                     </tr>
                 </tbody>
-                <br/>
-                <br/>
-                <br/>
 
             </table>
+
+            <div style={{width: '100%', height: '400px'}}>
+                <GoogleMapReact
+                    defaultCenter={{lat: this.props.weatherData.data.coord.lat, lng: this.props.weatherData.data.coord.lon}}
+                    defaultZoom={11}>
+               </GoogleMapReact>
+           </div>
+
+        </div>
         )
     }
 }

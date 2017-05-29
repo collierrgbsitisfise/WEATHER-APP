@@ -1,5 +1,8 @@
 import React from 'react';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import WeatherTable from './WeatherTable';
+import Autocomplete from 'react-google-autocomplete';
+
 
 class WeatherMap extends React.Component {
     constructor(props){
@@ -45,10 +48,15 @@ class WeatherMap extends React.Component {
         <div className="row">
             <form onSubmit={this.getWeatherData}>
                 <div className="form-group">
-                    <input type="text" name="locality" className="form-control"
-                           onChange={this.onChange}
-                           value={this.state.locality}
-                           placeholder="locality name..."/>
+
+                   <Autocomplete name="locality" onChange={this.onChange}
+                                 value={this.state.locality}
+                                 placeholder="locality name..."
+                                style={{width: '100%'}}
+                                onPlaceSelected={(place) => {
+                                    console.log(place);
+                                    this.setState({locality: place.formatted_address})
+                                }}/>
                 </div>
                 <div className="form-group">
                     <button disabled={this.state.isLoading} className="btn btn-primary btn-lg btn-block">Get weather</button>
