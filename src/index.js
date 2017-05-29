@@ -6,7 +6,14 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import routes from './routes';
 
+const store = createStore(
+    (state = {}) => state,
+    applyMiddleware(thunk)
+)
+
 ReactDOM.render(
-    <Router history={ hashHistory } routes={ routes }></Router>,
+    <Provider store={ store }>
+        <Router history={ hashHistory } routes={ routes }></Router>
+    </Provider>,
     document.getElementById('root')
 );
