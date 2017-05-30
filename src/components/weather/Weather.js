@@ -7,10 +7,8 @@ class Weather extends React.Component {
     render () {
         const { getWeatherByLocationName } = this.props;
         return (
-            <div className="row">
-                <div className="col-md-4 col-md-offset-4">
-                    <WeatherForm getWeatherByLocationName={getWeatherByLocationName} getWeatherByCordinates={getWeatherByCordinates} />
-                </div>
+            <div className="jumbotron">
+                <WeatherForm getWeatherByLocationName={getWeatherByLocationName} getWeatherByCordinates={getWeatherByCordinates} />
             </div>
         )
     }

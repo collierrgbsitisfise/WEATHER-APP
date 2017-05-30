@@ -9,7 +9,7 @@ export default () => {
 
                 <div className="navbar-header">
                     <Link className="navbar-brand" to="/">
-                        <img alt="Brand" src="https://lh3.googleusercontent.com/SDGdPRkZikGK8hZw4Zi0uLOxCV8IhMpOn3NVTwhpZ0Qlo7aTjaUk03VoXFs7L05lIg=w300" width="25px" height="25px"/>
+                        <img alt="Brand" src="http://checktheweather.co/icon.png" width="25px" height="25px"/>
                     </Link>
                 </div>
 

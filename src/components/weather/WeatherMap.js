@@ -21,11 +21,11 @@ class WeatherMap extends React.Component {
         this.changeCordinates = this.changeCordinates.bind(this);
         this.getInfoByCordinates = this.getInfoByCordinates.bind(this);
         this.tableInfo = this.tableInfo.bind(this);
+        this.fromFarhenheitToCelsius = this.fromFarhenheitToCelsius.bind(this);
+
     }
 
     tableInfo (regionInfo) {
-        console.log('AAAAAA');
-        console.log(regionInfo);
         return (
             <div style={{width: '100%'}}>
                 <table className="table table-striped">
@@ -48,11 +48,11 @@ class WeatherMap extends React.Component {
                         <tr>
                             <td className="text-center">{regionInfo.sys.country}</td>
                             <td className="text-center">{regionInfo.name}</td>
-                            <td className="text-center">{regionInfo.main.temp}</td>
-                            <td className="text-center">{regionInfo.main.pressure}</td>
-                            <td className="text-center">{regionInfo.main.humidity}</td>
-                            <td className="text-center">{regionInfo.main.temp_min}</td>
-                            <td className="text-center">{regionInfo.main.temp_max}</td>
+                            <td className="text-center">{this.fromFarhenheitToCelsius(regionInfo.main.temp) + '(°C)'}</td>
+                            <td className="text-center">{regionInfo.main.pressure + '(hPa)'}</td>
+                            <td className="text-center">{regionInfo.main.humidity + '%'}</td>
+                            <td className="text-center">{this.fromFarhenheitToCelsius(regionInfo.main.temp_min) + '(°C)'}</td>
+                            <td className="text-center">{this.fromFarhenheitToCelsius(regionInfo.main.temp_max) + '(°C)'}</td>
                         </tr>
                     </tbody>
 
@@ -63,13 +63,16 @@ class WeatherMap extends React.Component {
         )
     }
 
+    fromFarhenheitToCelsius (tmpInFar){
+        return Math.round((tmpInFar - 273.15));
+    }
+
     getInfoByCordinates (lat , lng) {
 
         // this.setState({isLoaded: false});
 
         this.props.getWeatherByCordinates(lat, lng)
             .then(res => {
-                console.log(res.data);
                 this.setState({isLoaded: true});
                 this.setState({regionInfo: res.data});
             })
@@ -96,16 +99,14 @@ class WeatherMap extends React.Component {
     }
 
     render () {
-        const { isLoaded, regionInfo } = this.state;
-        console.log('rerender');
-        console.log(regionInfo);
+        const { isLoaded, regionInfo } = this.state
         return (
             <div className="jumbotron">
                 {Object.keys(regionInfo).length == 0 ? '' : this.tableInfo(regionInfo)}
                 <div style={{width: '100%', height: '800px'}}>
                     <GoogleMapReact
                         defaultCenter={{lat: 50, lng: 50}}
-                        defaultZoom={5}
+                        defaultZoom={8}
                         onClick={(place) => this.changeCordinates(place)}>
                    </GoogleMapReact>
                </div>
