@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import WeatherForm  from './WeatherForm.js';
-import { getWeatherByLocationName } from './../../actions/getWeatherAction';
+import { getWeatherByLocationName , getWeatherByCordinates } from './../../actions/getWeatherAction';
 
 class Weather extends React.Component {
     render () {
@@ -9,11 +9,11 @@ class Weather extends React.Component {
         return (
             <div className="row">
                 <div className="col-md-4 col-md-offset-4">
-                    <WeatherForm getWeatherByLocationName={getWeatherByLocationName} />
+                    <WeatherForm getWeatherByLocationName={getWeatherByLocationName} getWeatherByCordinates={getWeatherByCordinates} />
                 </div>
             </div>
         )
     }
 }
 
-export default connect((state) => {return {} } , { getWeatherByLocationName })(Weather);
+export default connect((state) => {return {} } , { getWeatherByLocationName, getWeatherByCordinates })(Weather);

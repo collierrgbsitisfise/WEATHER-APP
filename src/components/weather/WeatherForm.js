@@ -65,7 +65,7 @@ class WeatherMap extends React.Component {
                     {this.state.isLoading ? <div className="loader"></div>: ''}
                 </div>
             </form>
-            {this.state.isLoaded ? <WeatherTable weatherData={this.state.weatherData}/> : ''}
+            {this.state.isLoaded ? <WeatherTable weatherData={this.state.weatherData} getWeatherByCordinates={this.props.getWeatherByCordinates} /> : ''}
         </div>
         )
     }
